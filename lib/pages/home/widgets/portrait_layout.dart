@@ -42,11 +42,13 @@ class PortraitLayoutBody extends StatelessWidget{
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 25, left: 25),
             ),
+            TextAboveButton(),
             ImagePickerButton(onPressed: null,),
           ],
         ),
