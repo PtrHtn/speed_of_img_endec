@@ -1,6 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:speed_of_img_endec/pages/home/home_controller.dart';
 
 import '../home_widgets.dart';
 
@@ -27,7 +29,7 @@ class PortraitLayout extends StatelessWidget {
   }
 }
 
-class PortraitLayoutBody extends StatelessWidget{
+class PortraitLayoutBody extends GetView<HomeController>{
   @override
   Widget build(BuildContext context) {
 
@@ -49,7 +51,9 @@ class PortraitLayoutBody extends StatelessWidget{
               padding: const EdgeInsets.only(right: 25, left: 25),
             ),
             TextAboveButton(),
-            ImagePickerButton(onPressed: null,),
+            ImagePickerButton(
+              onPressed: () async => controller.onPressedImagePickerButton(context),
+            ),
           ],
         ),
       ),
