@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 import 'pages/home/home_binding.dart';
 import 'pages/home/home_page.dart';
+import 'pages/results/results_binding.dart';
+import 'pages/results/results_page.dart';
 
 void main() {
   runApp(SpeedOfImageEcDecApp());
@@ -21,6 +23,7 @@ class SpeedOfImageEcDecApp extends StatelessWidget {
       initialRoute: '/home_page',
       getPages: [
         GetPage(name: '/home_page', page: () => HomePage(), binding: HomeBinding()),
+        GetPage(name: '/results_page', page: () => ResultsPage(), binding: ResultsBinding()),
       ],
     );
   }
