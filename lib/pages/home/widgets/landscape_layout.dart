@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../home_controller.dart';
 import '../home_widgets.dart';
 
 class LandscapeLayout extends StatelessWidget {
@@ -13,7 +15,7 @@ class LandscapeLayout extends StatelessWidget {
   }
 }
 
-class LandscapeLayoutBody extends StatelessWidget {
+class LandscapeLayoutBody extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +34,7 @@ class LandscapeLayoutBody extends StatelessWidget {
             ),
             TextAboveButton(),
             ImagePickerButton(
-              onPressed: null,
+              onPressed: () async => controller.onPressedImagePickerButton(context),
             ),
           ],
         ),
