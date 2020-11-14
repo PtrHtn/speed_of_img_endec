@@ -7,6 +7,7 @@ class HomeController extends GetxController{
   String imageAddress;
 
   Future onPressedImagePickerButton(BuildContext context) async {
+
     FilePickerResult result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowMultiple: false,
@@ -16,5 +17,8 @@ class HomeController extends GetxController{
     if (result != null) {
       imageAddress = result.paths.map((path) => path).toString();
     }
+
+    Get.offNamed('/results_page', arguments: [imageAddress,]);
+
   }
 }
