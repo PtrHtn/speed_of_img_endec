@@ -18,7 +18,7 @@ class HomeController extends GetxController{
       imageAddress = result.paths.map((path) => path).toString();
     }
 
-    Get.offNamed('/results_page', arguments: [imageAddress,]);
+    Get.toNamed('/results_page', arguments: [imageAddress,]);
 
   }
 }
