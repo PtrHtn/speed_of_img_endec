@@ -31,6 +31,8 @@ dependencies:
   get: ^3.17.1
   file_picker: ^2.1.0
   image: ^2.1.19
+  path_provider: ^1.6.21
+
 
 dev_dependencies:
   flutter_test:
