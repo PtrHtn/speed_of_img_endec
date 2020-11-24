@@ -17,7 +17,7 @@ class PortraitLayout extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Text(
-              '  Speed of image En/Dec',
+              '  Results',
             ),
           ],
         ),
