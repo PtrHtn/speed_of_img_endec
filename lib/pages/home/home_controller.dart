@@ -15,7 +15,7 @@ class HomeController extends GetxController{
     );
 
     if (result != null) {
-      imageAddress = result.paths.map((path) => path).toString();
+      imageAddress = result.paths.map((path) => path).toString().replaceAll('(', '').replaceAll(')', '');
     }
 
     Get.toNamed('/results_page', arguments: [imageAddress,]);
