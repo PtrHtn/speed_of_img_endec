@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:image/image.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +23,9 @@ class ResultsController extends GetxController{
     }
     temporaryImageDirectory = await Directory(temporaryImageDirectoryPath).create(recursive: true);
     final filteredImagePath = '$temporaryImageDirectoryPath/resizedImage.png';
+
+    final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
+    
   }
 
 }
