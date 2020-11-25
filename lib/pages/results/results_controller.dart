@@ -25,7 +25,9 @@ class ResultsController extends GetxController{
     final filteredImagePath = '$temporaryImageDirectoryPath/resizedImage.png';
 
     final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
-    
+
+    var encodedPngImage = encodePng(decodedImage);
+
   }
 
 }
