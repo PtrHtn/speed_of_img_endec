@@ -47,6 +47,11 @@ class PortraitLayoutBody extends GetView<ResultsController>{
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Padding(padding: const EdgeInsets.only(right: 25, left: 25)),
+        Obx(() => Center(
+          child: controller.imageProcessing.value
+          ? Text("Processing")
+          : Text("Done"),
+        ))
           ],
         ),
       ),
