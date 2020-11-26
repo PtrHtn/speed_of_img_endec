@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:image/image.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:get/get.dart';
 
 class ResultsController extends GetxController{
@@ -15,19 +14,15 @@ class ResultsController extends GetxController{
 
   void imageResizing(String imageAddress) async {
 
-    final Directory temporaryDirectory = await getTemporaryDirectory();
-    final String temporaryImageDirectoryPath = '${temporaryDirectory.path}/images';
-    Directory temporaryImageDirectory = Directory(temporaryImageDirectoryPath);
-    if (await temporaryImageDirectory.exists() == true) {
-      await temporaryImageDirectory.delete(recursive: true);
-    }
-    temporaryImageDirectory = await Directory(temporaryImageDirectoryPath).create(recursive: true);
-    final filteredImagePath = '$temporaryImageDirectoryPath/resizedImage.png';
-
+    final aa = new Stopwatch()..start();
     final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
+    print('\n > Image decoding took: ${aa.elapsed.inSeconds} seconds');
 
-    var encodedPngImage = encodePng(decodedImage);
+    final ac = new Stopwatch()..start();
+    encodePng(decodedImage);
+    print('\n > Image encoding took: ${ac.elapsed.inSeconds} seconds');
 
+    imageProcessing.value = false;
   }
 
 }
