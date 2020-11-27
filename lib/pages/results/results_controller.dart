@@ -11,12 +11,14 @@ class ResultsController extends GetxController{
   }
 
   final imageProcessing = true.obs;
+  final imageDecodingTime = 0.obs;
 
   void imageResizing(String imageAddress) async {
 
     final aa = new Stopwatch()..start();
     final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
-    print('\n > Image decoding took: ${aa.elapsed.inSeconds} seconds');
+    imageDecodingTime.value = aa.elapsed.inSeconds;
+    print('\n > Image decoding took: ${imageDecodingTime.value} seconds');
 
     final ac = new Stopwatch()..start();
     encodePng(decodedImage);
