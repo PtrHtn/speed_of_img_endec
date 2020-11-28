@@ -7,13 +7,14 @@ class ResultsController extends GetxController{
   @override
   void onReady() {
     super.onReady();
-    imageResizing(Get.arguments[0]);
+    dartImageEnDec(Get.arguments[0]);
   }
 
   final imageProcessing = true.obs;
   final imageDecodingTime = 0.obs;
+  final imageEncodingTime = 0.obs;
 
-  void imageResizing(String imageAddress) async {
+  void dartImageEnDec(String imageAddress) async {
 
     final aa = new Stopwatch()..start();
     final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
