@@ -12,6 +12,7 @@ class ResultsController extends GetxController{
 
   final imageDecoding = true.obs;
   final imageEncoding = true.obs;
+  final imageEncodingWaiting = true.obs;
   final imageDecodingTime = 0.obs;
   final imageEncodingTime = 0.obs;
 
@@ -22,6 +23,8 @@ class ResultsController extends GetxController{
     imageDecodingTime.value = aa.elapsed.inSeconds;
     print('\n > Image decoding took: ${imageDecodingTime.value} seconds');
     imageDecoding.value = false;
+
+    imageEncodingWaiting.value = false;
 
     final ab = new Stopwatch()..start();
     encodePng(decodedImage);
