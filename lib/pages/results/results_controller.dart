@@ -10,7 +10,7 @@ class ResultsController extends GetxController{
     dartImageEnDec(Get.arguments[0]);
   }
 
-  final imageProcessing = true.obs;
+  final imageDecoding = true.obs;
   final imageDecodingTime = 0.obs;
   final imageEncodingTime = 0.obs;
 
@@ -20,12 +20,12 @@ class ResultsController extends GetxController{
     final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
     imageDecodingTime.value = aa.elapsed.inSeconds;
     print('\n > Image decoding took: ${imageDecodingTime.value} seconds');
+    imageDecoding.value = false;
 
     final ac = new Stopwatch()..start();
     encodePng(decodedImage);
     print('\n > Image encoding took: ${ac.elapsed.inSeconds} seconds');
 
-    imageProcessing.value = false;
   }
 
 }
