@@ -11,10 +11,12 @@ class ResultsController extends GetxController{
   }
 
   final imageDecoding = true.obs;
-  final imageEncoding = true.obs;
+  final jpgEncoding = true.obs;
+  final pngEncoding = true.obs;
   final imageEncodingWaiting = true.obs;
   final imageDecodingTime = 0.obs;
-  final imageEncodingTime = 0.obs;
+  final jpgEncodingTime = 0.obs;
+  final pngEncodingTime = 0.obs;
 
   void dartImageEnDec(String imageAddress) async {
 
@@ -27,10 +29,16 @@ class ResultsController extends GetxController{
     imageEncodingWaiting.value = false;
 
     final ab = new Stopwatch()..start();
+    encodeJpg(decodedImage);
+    jpgEncodingTime.value = ab.elapsed.inSeconds;
+    print('\n > Jpg encoding took: ${pngEncodingTime.value} seconds');
+    jpgEncoding.value = false;
+
+    final ac = new Stopwatch()..start();
     encodePng(decodedImage);
-    imageEncodingTime.value = ab.elapsed.inSeconds;
-    print('\n > Image encoding took: ${imageEncodingTime.value} seconds');
-    imageEncoding.value = false;
+    pngEncodingTime.value = ac.elapsed.inSeconds;
+    print('\n > Png encoding took: ${pngEncodingTime.value} seconds');
+    pngEncoding.value = false;
 
   }
 
