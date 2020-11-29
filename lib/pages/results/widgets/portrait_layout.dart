@@ -46,6 +46,9 @@ class PortraitLayoutBody extends GetView<ResultsController> {
                   controller.imageDecoding.value
                       ? Text("Image decoding: Processing\n")
                       : Text("Image decoding: ${controller.imageDecodingTime.value} seconds\n"),
+                  controller.pngEncoding.value
+                      ? Text("Image encoding: ${controller.imageEncodingWaiting.value ? 'Waiting' : 'Processing'}")
+                      : Text("Image encoding: ${controller.pngEncodingTime.value} seconds")
                 ],
               ),
             ),
