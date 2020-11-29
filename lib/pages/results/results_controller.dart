@@ -13,7 +13,8 @@ class ResultsController extends GetxController{
   final imageDecoding = true.obs;
   final jpgEncoding = true.obs;
   final pngEncoding = true.obs;
-  final imageEncodingWaiting = true.obs;
+  final jpgEncodingQueuing = true.obs;
+  final pngEncodingQueuing = true.obs;
   final imageDecodingTime = 0.obs;
   final jpgEncodingTime = 0.obs;
   final pngEncodingTime = 0.obs;
@@ -26,13 +27,15 @@ class ResultsController extends GetxController{
     print('\n > Image decoding took: ${imageDecodingTime.value} seconds');
     imageDecoding.value = false;
 
-    imageEncodingWaiting.value = false;
+    jpgEncodingQueuing.value = false;
 
     final ab = new Stopwatch()..start();
     encodeJpg(decodedImage);
     jpgEncodingTime.value = ab.elapsed.inSeconds;
     print('\n > Jpg encoding took: ${pngEncodingTime.value} seconds');
     jpgEncoding.value = false;
+
+    pngEncodingQueuing.value = false;
 
     final ac = new Stopwatch()..start();
     encodePng(decodedImage);
