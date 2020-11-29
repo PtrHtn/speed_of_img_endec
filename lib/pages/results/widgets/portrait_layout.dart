@@ -36,18 +36,21 @@ class PortraitLayoutBody extends GetView<ResultsController> {
           color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        child: Column(
+        child: Obx(() => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Obx(() => Center(
-                  child: controller.imageProcessing.value
-                      ? Text("Processing")
-                      : Text("Done"),
-                ),
+            Center(
+              child: Column(
+                children: [
+                  controller.imageDecoding.value
+                      ? Text("Image decoding: Processing\n")
+                      : Text("Image decoding: ${controller.imageDecodingTime.value} seconds\n"),
+                ],
+              ),
             ),
           ],
-        ),
+        )),
       ),
     );
   }
