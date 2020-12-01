@@ -8,9 +8,9 @@ class ResultsController extends GetxController{
   static const MethodChannel methodChannel = const MethodChannel('speed_of_img_endec');
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
-    dartImageEnDec(Get.arguments[0]);
+    await dartImageEnDec(Get.arguments[0]);
   }
 
   final imageDecoding = true.obs;
@@ -22,7 +22,7 @@ class ResultsController extends GetxController{
   final jpgEncodingTime = 0.obs;
   final pngEncodingTime = 0.obs;
 
-  void dartImageEnDec(String imageAddress) async {
+  Future dartImageEnDec(String imageAddress) async {
 
     final aa = Stopwatch()..start();
     final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
