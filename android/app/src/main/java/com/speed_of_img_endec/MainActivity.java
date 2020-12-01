@@ -34,6 +34,8 @@ public class MainActivity extends FlutterActivity {
 
                         case "imageDecoding":
 
+                            String imageFilepath = call.argument("imageFilepath");
+                            result.success(imageDecoding(imageFilepath));
                             break;
 
                         default:
@@ -42,6 +44,14 @@ public class MainActivity extends FlutterActivity {
                     }
                 }
         );
+    }
+
+    private int imageDecoding(String imageFilepath) {
+        long startTime = SystemClock.elapsedRealtime();
+        final Bitmap decodedImage = BitmapFactory.decodeFile(imageFilepath);
+        long imageDecodingTime = SystemClock.elapsedRealtime() - startTime;
+
+        return (int) imageDecodingTime;
     }
 
 }
