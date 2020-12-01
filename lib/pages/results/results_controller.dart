@@ -11,6 +11,7 @@ class ResultsController extends GetxController{
   void onReady() async {
     super.onReady();
     await dartImageEnDec(Get.arguments[0]);
+    await javaImageEnDec(Get.arguments[0]);
   }
 
   final imageDecoding = true.obs;
@@ -18,15 +19,15 @@ class ResultsController extends GetxController{
   final pngEncoding = true.obs;
   final jpgEncodingQueuing = true.obs;
   final pngEncodingQueuing = true.obs;
-  final imageDecodingTime = 0.obs;
-  final jpgEncodingTime = 0.obs;
-  final pngEncodingTime = 0.obs;
+  final imageDecodingTime = 0.0.obs;
+  final jpgEncodingTime = 0.0.obs;
+  final pngEncodingTime = 0.0.obs;
 
   Future dartImageEnDec(String imageAddress) async {
 
     final aa = Stopwatch()..start();
     final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
-    imageDecodingTime.value = aa.elapsed.inSeconds;
+    imageDecodingTime.value = (aa.elapsed.inMilliseconds / 1000).toPrecision(1);
     print('\n > Image decoding took: ${imageDecodingTime.value} seconds');
 
     imageDecoding.value = false;
@@ -35,7 +36,7 @@ class ResultsController extends GetxController{
 
     final ab = Stopwatch()..start();
     encodeJpg(decodedImage);
-    jpgEncodingTime.value = ab.elapsed.inSeconds;
+    jpgEncodingTime.value = (ab.elapsed.inMilliseconds / 1000).toPrecision(1);
     print('\n > Jpg encoding took: ${jpgEncodingTime.value} seconds');
     jpgEncoding.value = false;
 
@@ -43,7 +44,7 @@ class ResultsController extends GetxController{
 
     final ac = Stopwatch()..start();
     encodePng(decodedImage);
-    pngEncodingTime.value = ac.elapsed.inSeconds;
+    pngEncodingTime.value = (ac.elapsed.inMilliseconds / 1000).toPrecision(1);
     print('\n > Png encoding took: ${pngEncodingTime.value} seconds');
     pngEncoding.value = false;
 
