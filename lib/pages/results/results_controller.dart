@@ -1,8 +1,11 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:image/image.dart';
 import 'package:get/get.dart';
 
 class ResultsController extends GetxController{
+
+  static const MethodChannel methodChannel = const MethodChannel('speed_of_img_endec');
 
   @override
   void onReady() {
@@ -21,23 +24,24 @@ class ResultsController extends GetxController{
 
   void dartImageEnDec(String imageAddress) async {
 
-    final aa = new Stopwatch()..start();
+    final aa = Stopwatch()..start();
     final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
     imageDecodingTime.value = aa.elapsed.inSeconds;
     print('\n > Image decoding took: ${imageDecodingTime.value} seconds');
+
     imageDecoding.value = false;
 
     jpgEncodingQueuing.value = false;
 
-    final ab = new Stopwatch()..start();
+    final ab = Stopwatch()..start();
     encodeJpg(decodedImage);
     jpgEncodingTime.value = ab.elapsed.inSeconds;
-    print('\n > Jpg encoding took: ${pngEncodingTime.value} seconds');
+    print('\n > Jpg encoding took: ${jpgEncodingTime.value} seconds');
     jpgEncoding.value = false;
 
     pngEncodingQueuing.value = false;
 
-    final ac = new Stopwatch()..start();
+    final ac = Stopwatch()..start();
     encodePng(decodedImage);
     pngEncodingTime.value = ac.elapsed.inSeconds;
     print('\n > Png encoding took: ${pngEncodingTime.value} seconds');
