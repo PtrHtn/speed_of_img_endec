@@ -50,6 +50,12 @@ class ResultsController extends GetxController{
 
   }
 
+  Future javaImageEnDec(String imageAddress) async {
+
+    final imageDecodingTime = await javaImageDecoding(imageAddress);
+    print('\n > Java image decoding took: ${(imageDecodingTime / 1000).toPrecision(1)} seconds');
+  }
+
   static Future<int> javaImageDecoding(String imageFilepath) async {
     return await methodChannel.invokeMethod(
         'imageDecoding',
