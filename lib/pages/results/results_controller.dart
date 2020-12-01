@@ -49,4 +49,10 @@ class ResultsController extends GetxController{
 
   }
 
+  static Future<int> javaImageDecoding(String imageFilepath) async {
+    return await methodChannel.invokeMethod(
+        'imageDecoding',
+        <String, dynamic>{'imageFilepath': imageFilepath}
+        );
+  }
 }
