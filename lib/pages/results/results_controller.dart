@@ -14,43 +14,51 @@ class ResultsController extends GetxController{
     await javaImageEnDec(Get.arguments[0]);
   }
 
-  final imageDecoding = true.obs;
-  final jpgEncoding = true.obs;
-  final pngEncoding = true.obs;
-  final jpgEncodingQueuing = true.obs;
-  final pngEncodingQueuing = true.obs;
-  final imageDecodingTime = 0.0.obs;
-  final jpgEncodingTime = 0.0.obs;
-  final pngEncodingTime = 0.0.obs;
+  final dartImageDecoded = false.obs;
+  final dartJpgEncodingQueuing = true.obs;
+  final dartPngEncodingQueuing = true.obs;
+  final dartJpgEncoded = false.obs;
+  final dartPngEncoded = false.obs;
+  final dartTimeOfImageDecoding = 0.0.obs;
+  final dartTimeOfJpgEncoding = 0.0.obs;
+  final dartTimeOfPngEncoding = 0.0.obs;
 
   Future dartImageEnDec(String imageAddress) async {
 
+    await Future.delayed(const Duration(milliseconds: 500));
+
     final aa = Stopwatch()..start();
     final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
-    imageDecodingTime.value = (aa.elapsed.inMilliseconds / 1000).toPrecision(1);
-    print('\n > Image decoding took: ${imageDecodingTime.value} seconds');
+    dartTimeOfImageDecoding.value = (aa.elapsed.inMilliseconds / 1000).toPrecision(1);
+    print('\n > Image decoding took: ${dartTimeOfImageDecoding.value} seconds');
 
-    imageDecoding.value = false;
+    dartImageDecoded.value = true;
 
-    jpgEncodingQueuing.value = false;
+    dartJpgEncodingQueuing.value = false;
+
+    await Future.delayed(const Duration(milliseconds: 500));
 
     final ab = Stopwatch()..start();
     encodeJpg(decodedImage);
-    jpgEncodingTime.value = (ab.elapsed.inMilliseconds / 1000).toPrecision(1);
-    print('\n > Jpg encoding took: ${jpgEncodingTime.value} seconds');
-    jpgEncoding.value = false;
+    dartTimeOfJpgEncoding.value = (ab.elapsed.inMilliseconds / 1000).toPrecision(1);
+    print('\n > Jpg encoding took: ${dartTimeOfJpgEncoding.value} seconds');
+    dartJpgEncoded.value = false;
 
-    pngEncodingQueuing.value = false;
+    dartPngEncodingQueuing.value = false;
+
+    await Future.delayed(const Duration(milliseconds: 500));
 
     final ac = Stopwatch()..start();
     encodePng(decodedImage);
-    pngEncodingTime.value = (ac.elapsed.inMilliseconds / 1000).toPrecision(1);
-    print('\n > Png encoding took: ${pngEncodingTime.value} seconds');
-    pngEncoding.value = false;
+    dartTimeOfPngEncoding.value = (ac.elapsed.inMilliseconds / 1000).toPrecision(1);
+    print('\n > Png encoding took: ${dartTimeOfPngEncoding.value} seconds');
+    dartPngEncoded.value = false;
 
   }
 
   Future javaImageEnDec(String imageAddress) async {
+
+    await Future.delayed(const Duration(milliseconds: 500));
 
     final imageDecodingTime = await javaImageDecoding(imageAddress);
     print('\n > Java image decoding took: ${(imageDecodingTime / 1000).toPrecision(1)} seconds');
