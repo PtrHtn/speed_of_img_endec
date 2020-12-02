@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:speed_of_img_endec/pages/home/home_controller.dart';
 
 import '../results_controller.dart';
 
@@ -30,34 +29,42 @@ class PortraitLayoutBody extends GetView<ResultsController> {
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFF737373),
-      child: Container(
-        margin: EdgeInsets.all(40),
-        decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
-        child: Obx(() => Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Center(
-              child: Column(
+      child: Obx(() => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Expanded(
+            flex: 50,
+            child: Container(
+              margin: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 10),
+              decoration: BoxDecoration(
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Column(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  controller.imageDecoding.value
-                      ? Text("Image decoding: Processing\n")
-                      : Text("Image decoding: ${controller.imageDecodingTime.value} seconds\n"),
-                  controller.jpgEncoding.value
-                      ? Text("Jpg encoding: ${controller.jpgEncodingQueuing.value ? 'Waiting' : 'Processing'}\n")
-                      : Text("Jpg encoding: ${controller.jpgEncodingTime.value} seconds\n"),
-                  controller.pngEncoding.value
-                      ? Text("Png encoding: ${controller.pngEncodingQueuing.value ? 'Waiting' : 'Processing'}")
-                      : Text("Png encoding: ${controller.pngEncodingTime.value} seconds")
+                  Text("Dart\n\n"),
+                  controller.dartImageDecoded.value == false
+                      ? Text("Image decoding: ${controller.dartQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n")
+                      : Text(
+                      "Image decoding: ${controller.dartTimeOfImageDecoding.value} seconds\n"),
+                  controller.dartJpgEncoded.value == false
+                      ? Text(
+                      "Jpg encoding: ${controller.dartQueuingJpgEncoding.value ? 'Queuing' : 'Processing'}\n")
+                      : Text(
+                      "Jpg encoding: ${controller.dartTimeOfJpgEncoding.value} seconds\n"),
+                  controller.dartPngEncoded.value == false
+                      ? Text(
+                      "Png encoding: ${controller.dartQueuingPngEncoding.value ? 'Queuing' : 'Processing'}")
+                      : Text(
+                      "Png encoding: ${controller.dartTimeOfPngEncoding.value} seconds")
                 ],
               ),
             ),
-          ],
-        )),
-      ),
+          ),
+        ],
+      )),
+      // ),
     );
   }
 }
