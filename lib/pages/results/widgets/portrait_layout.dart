@@ -47,21 +47,40 @@ class PortraitLayoutBody extends GetView<ResultsController> {
                   controller.dartImageDecoded.value == false
                       ? Text("Image decoding: ${controller.dartQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n")
                       : Text(
-                      "Image decoding: ${controller.dartTimeOfImageDecoding.value} seconds\n"),
+                      "Image decoding: ${controller.dartTimeOfImageDecoding.value} sec\n"),
                   controller.dartJpgEncoded.value == false
                       ? Text(
                       "Jpg encoding: ${controller.dartQueuingJpgEncoding.value ? 'Queuing' : 'Processing'}\n")
                       : Text(
-                      "Jpg encoding: ${controller.dartTimeOfJpgEncoding.value} seconds\n"),
+                      "Jpg encoding: ${controller.dartTimeOfJpgEncoding.value} sec\n"),
                   controller.dartPngEncoded.value == false
                       ? Text(
                       "Png encoding: ${controller.dartQueuingPngEncoding.value ? 'Queuing' : 'Processing'}")
                       : Text(
-                      "Png encoding: ${controller.dartTimeOfPngEncoding.value} seconds")
+                      "Png encoding: ${controller.dartTimeOfPngEncoding.value} sec")
                 ],
               ),
             ),
           ),
+          Expanded(
+            flex: 50,
+            child: Container(
+              margin: EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 20),
+              decoration: BoxDecoration(
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Java\n\n"),
+                  controller.javaImageDecoded.value == false
+                      ? Text("Image decoding: ${controller.javaQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n")
+                      : Text(
+                      "Image decoding: ${controller.javaTimeOfImageDecoding.value} sec\n"),
+                ],
+              ),
+            ),
+          )
         ],
       )),
       // ),
