@@ -18,7 +18,7 @@ class SpeedOfImageEcDecApp extends StatelessWidget {
     return GetMaterialApp(
 
       debugShowCheckedModeBanner: false,
-      title: 'Image Averaging',
+      title: 'Speed of image EnDec',
       theme: ThemeData.dark(),
       initialRoute: '/home_page',
       getPages: [
