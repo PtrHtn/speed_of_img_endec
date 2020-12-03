@@ -43,7 +43,7 @@ class PortraitLayoutBody extends GetView<ResultsController> {
               ),
               child: Column(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Dart\n\n"),
+                  Text("Dart\n"),
                   controller.dartImageDecoded.value == false
                       ? Text("Image decoding: ${controller.dartQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n")
                       : Text(
@@ -72,11 +72,16 @@ class PortraitLayoutBody extends GetView<ResultsController> {
               ),
               child: Column(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Java\n\n"),
+                  Text("Java\n"),
                   controller.javaImageDecoded.value == false
                       ? Text("Image decoding: ${controller.javaQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n")
                       : Text(
                       "Image decoding: ${controller.javaTimeOfImageDecoding.value} sec\n"),
+                  controller.javaJpgEncoded.value == false
+                      ? Text(
+                      "Jpg encoding: ${controller.javaQueuingJpgEncoding.value ? 'Queuing' : 'Processing'}\n")
+                      : Text(
+                      "Jpg encoding: ${controller.javaTimeOfJpgEncoding.value} sec\n"),
                 ],
               ),
             ),
