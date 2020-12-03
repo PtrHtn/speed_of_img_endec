@@ -25,20 +25,22 @@ class ResultsController extends GetxController{
   final dartTimeOfPngEncoding = 0.0.obs;
 
   final javaQueuingImageDecoding = true.obs;
+  final javaQueuingJpgEncoding = true.obs;
   final javaImageDecoded = false.obs;
+  final javaJpgEncoded = false.obs;
   final javaTimeOfImageDecoding = 0.0.obs;
+  final javaTimeOfJpgEncoding = 0.0.obs;
 
-
-  Future dartImageEnDec(String imageAddress) async {
+  Future dartImageEnDec(String imageFilepath) async {
 
     dartQueuingImageDecoding.value = false;
 
     await Future.delayed(const Duration(milliseconds: 500));
 
     final aa = Stopwatch()..start();
-    final decodedImage = decodeImage(File(imageAddress).readAsBytesSync());
+    final decodedImage = decodeImage(File(imageFilepath).readAsBytesSync());
     dartTimeOfImageDecoding.value = (aa.elapsed.inMilliseconds / 1000).toPrecision(1);
-    print('\n > Image decoding took: ${dartTimeOfImageDecoding.value} seconds');
+    print('\n > Dart image decoding took: ${dartTimeOfImageDecoding.value} seconds');
 
     dartImageDecoded.value = true;
 
@@ -49,7 +51,7 @@ class ResultsController extends GetxController{
     final ab = Stopwatch()..start();
     encodeJpg(decodedImage);
     dartTimeOfJpgEncoding.value = (ab.elapsed.inMilliseconds / 1000).toPrecision(1);
-    print('\n > Jpg encoding took: ${dartTimeOfJpgEncoding.value} seconds');
+    print('\n > Dart jpg encoding took: ${dartTimeOfJpgEncoding.value} seconds');
     dartJpgEncoded.value = true;
 
     dartQueuingPngEncoding.value = false;
@@ -59,21 +61,30 @@ class ResultsController extends GetxController{
     final ac = Stopwatch()..start();
     encodePng(decodedImage);
     dartTimeOfPngEncoding.value = (ac.elapsed.inMilliseconds / 1000).toPrecision(1);
-    print('\n > Png encoding took: ${dartTimeOfPngEncoding.value} seconds');
+    print('\n > Dart png encoding took: ${dartTimeOfPngEncoding.value} seconds');
     dartPngEncoded.value = true;
 
   }
 
-  Future javaImageEnDec(String imageAddress) async {
+  Future javaImageEnDec(String imageFilepath) async {
 
     javaQueuingImageDecoding.value = false;
 
     await Future.delayed(const Duration(milliseconds: 500));
 
-    javaTimeOfImageDecoding.value = (await javaImageDecoding(imageAddress) / 1000).toPrecision(1);
+    javaTimeOfImageDecoding.value = (await javaImageDecoding(imageFilepath) / 1000).toPrecision(2);
     print('\n > Java image decoding took: ${javaTimeOfImageDecoding.value} seconds');
 
     javaImageDecoded.value = true;
+
+    javaQueuingJpgEncoding.value = false;
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    javaTimeOfJpgEncoding.value = (await javaJpgEncoding(imageFilepath) / 1000).toPrecision(2);
+    print('\n > Java jpg encoding took: ${javaTimeOfJpgEncoding.value} seconds');
+    javaJpgEncoded.value = true;
+
   }
 
   static Future<int> javaImageDecoding(String imageFilepath) async {
@@ -81,5 +92,12 @@ class ResultsController extends GetxController{
         'imageDecoding',
         <String, dynamic>{'imageFilepath': imageFilepath}
         );
+  }
+
+  static Future<int> javaJpgEncoding(String imageFilepath) async {
+    return await methodChannel.invokeMethod(
+        'jpgEncoding',
+        <String, dynamic>{'imageFilepath': imageFilepath}
+    );
   }
 }
