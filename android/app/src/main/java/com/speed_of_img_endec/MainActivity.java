@@ -12,6 +12,7 @@ import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import io.flutter.embedding.android.FlutterActivity;
@@ -29,13 +30,20 @@ public class MainActivity extends FlutterActivity {
         GeneratedPluginRegistrant.registerWith(flutterEngine);
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL).setMethodCallHandler(
                 (call, result) -> {
-
+                    String imageFilepath;
+                    
                     switch (call.method) {
 
                         case "imageDecoding":
 
-                            String imageFilepath = call.argument("imageFilepath");
+                            imageFilepath = call.argument("imageFilepath");
                             result.success(imageDecoding(imageFilepath));
+                            break;
+
+                        case "jpgEncoding":
+
+                            imageFilepath = call.argument("imageFilepath");
+                            result.success(jpgEncoding(imageFilepath));
                             break;
 
                         default:
@@ -49,6 +57,17 @@ public class MainActivity extends FlutterActivity {
     private int imageDecoding(String imageFilepath) {
         long startTime = SystemClock.elapsedRealtime();
         final Bitmap decodedImage = BitmapFactory.decodeFile(imageFilepath);
+        long imageDecodingTime = SystemClock.elapsedRealtime() - startTime;
+
+        return (int) imageDecodingTime;
+    }
+
+    private int jpgEncoding(String imageFilepath) {
+        Bitmap decodedImage = BitmapFactory.decodeFile(imageFilepath);
+
+        long startTime = SystemClock.elapsedRealtime();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        decodedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         long imageDecodingTime = SystemClock.elapsedRealtime() - startTime;
 
         return (int) imageDecodingTime;
