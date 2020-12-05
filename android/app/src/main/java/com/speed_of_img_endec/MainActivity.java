@@ -46,6 +46,12 @@ public class MainActivity extends FlutterActivity {
                             result.success(jpgEncoding(imageFilepath));
                             break;
 
+                        case "pngEncoding":
+
+                            imageFilepath = call.argument("imageFilepath");
+                            result.success(pngEncoding(imageFilepath));
+                            break;
+                            
                         default:
                             result.notImplemented();
                             break;
@@ -68,6 +74,17 @@ public class MainActivity extends FlutterActivity {
         long startTime = SystemClock.elapsedRealtime();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         decodedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        long imageDecodingTime = SystemClock.elapsedRealtime() - startTime;
+
+        return (int) imageDecodingTime;
+    }
+
+    private int pngEncoding(String imageFilepath) {
+        Bitmap decodedImage = BitmapFactory.decodeFile(imageFilepath);
+
+        long startTime = SystemClock.elapsedRealtime();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        decodedImage.compress(Bitmap.CompressFormat.PNG, 0, baos);
         long imageDecodingTime = SystemClock.elapsedRealtime() - startTime;
 
         return (int) imageDecodingTime;
