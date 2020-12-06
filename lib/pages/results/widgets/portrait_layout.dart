@@ -82,6 +82,11 @@ class PortraitLayoutBody extends GetView<ResultsController> {
                       "Jpg encoding: ${controller.javaQueuingJpgEncoding.value ? 'Queuing' : 'Processing'}\n")
                       : Text(
                       "Jpg encoding: ${controller.javaTimeOfJpgEncoding.value} sec\n"),
+                  controller.javaPngEncoded.value == false
+                      ? Text(
+                      "Png encoding: ${controller.javaQueuingPngEncoding.value ? 'Queuing' : 'Processing'}")
+                      : Text(
+                      "Png encoding: ${controller.javaTimeOfPngEncoding.value} sec")
                 ],
               ),
             ),
