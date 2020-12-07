@@ -26,10 +26,13 @@ class ResultsController extends GetxController{
 
   final javaQueuingImageDecoding = true.obs;
   final javaQueuingJpgEncoding = true.obs;
+  final javaQueuingPngEncoding = true.obs;
   final javaImageDecoded = false.obs;
   final javaJpgEncoded = false.obs;
+  final javaPngEncoded = false.obs;
   final javaTimeOfImageDecoding = 0.0.obs;
   final javaTimeOfJpgEncoding = 0.0.obs;
+  final javaTimeOfPngEncoding = 0.0.obs;
 
   Future dartImageEnDec(String imageFilepath) async {
 
@@ -85,6 +88,14 @@ class ResultsController extends GetxController{
     print('\n > Java jpg encoding took: ${javaTimeOfJpgEncoding.value} seconds');
     javaJpgEncoded.value = true;
 
+    javaQueuingPngEncoding.value = false;
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    javaTimeOfPngEncoding.value = (await javaPngEncoding(imageFilepath) / 1000).toPrecision(2);
+    print('\n > Java png encoding took: ${javaTimeOfPngEncoding.value} seconds');
+    javaPngEncoded.value = true;
+
   }
 
   static Future<int> javaImageDecoding(String imageFilepath) async {
@@ -97,6 +108,13 @@ class ResultsController extends GetxController{
   static Future<int> javaJpgEncoding(String imageFilepath) async {
     return await methodChannel.invokeMethod(
         'jpgEncoding',
+        <String, dynamic>{'imageFilepath': imageFilepath}
+    );
+  }
+
+  static Future<int> javaPngEncoding(String imageFilepath) async {
+    return await methodChannel.invokeMethod(
+        'pngEncoding',
         <String, dynamic>{'imageFilepath': imageFilepath}
     );
   }
