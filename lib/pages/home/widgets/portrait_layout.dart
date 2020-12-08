@@ -36,7 +36,7 @@ class PortraitLayoutBody extends GetView<HomeController>{
     return Container(
       color: Color(0xFF737373),
       child: Container(
-        margin: EdgeInsets.all(40),
+        margin: EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: Theme
               .of(context)
