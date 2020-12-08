@@ -18,10 +18,14 @@ class LandscapeLayout extends StatelessWidget {
 class LandscapeLayoutBody extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Container(
       color: Color(0xFF737373),
       child: Container(
-        margin: EdgeInsets.all(40),
+        // margin: EdgeInsets.all(20),
+        margin: EdgeInsets.only(left: 20, top: 20 + statusBarHeight, right: 20, bottom: 20),
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.all(Radius.circular(20)),
