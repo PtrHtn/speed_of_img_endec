@@ -16,6 +16,9 @@ class LandscapeLayout extends StatelessWidget {
 class LandscapeLayoutBody extends GetView<ResultsController> {
   @override
   Widget build(BuildContext context) {
+
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Container(
       color: Color(0xFF737373),
       child: Obx(() => Row(
@@ -25,7 +28,7 @@ class LandscapeLayoutBody extends GetView<ResultsController> {
           Expanded(
             flex: 50,
             child: Container(
-              margin: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 10),
+              margin: EdgeInsets.only(left: 20, top: 20 + statusBarHeight, right: 10, bottom: 20),
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -54,7 +57,7 @@ class LandscapeLayoutBody extends GetView<ResultsController> {
           Expanded(
             flex: 50,
             child: Container(
-              margin: EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 20),
+              margin: EdgeInsets.only(left: 10, top: 20 + statusBarHeight, right: 20, bottom: 20),
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
