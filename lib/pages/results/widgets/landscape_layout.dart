@@ -35,7 +35,7 @@ class LandscapeLayoutBody extends GetView<ResultsController> {
               ),
               child: Column(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Dart\n"),
+                  Text("Dart\n\n"),
                   controller.dartImageDecoded.value == false
                       ? Text("Image decoding: ${controller.dartQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n")
                       : Text(
@@ -64,7 +64,7 @@ class LandscapeLayoutBody extends GetView<ResultsController> {
               ),
               child: Column(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Java\n"),
+                  Text("Java\n\n"),
                   controller.javaImageDecoded.value == false
                       ? Text("Image decoding: ${controller.javaQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n")
                       : Text(
