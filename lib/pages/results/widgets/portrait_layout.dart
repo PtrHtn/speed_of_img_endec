@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 import '../results_controller.dart';
 
@@ -36,7 +37,7 @@ class PortraitLayoutBody extends GetView<ResultsController> {
           Expanded(
             flex: 50,
             child: Container(
-              margin: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 10),
+              margin: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -62,10 +63,15 @@ class PortraitLayoutBody extends GetView<ResultsController> {
               ),
             ),
           ),
+          JumpingDotsProgressIndicator(
+            numberOfDots: 22,
+            color: Colors.white,
+            fontSize: 25,
+          ),
           Expanded(
             flex: 50,
             child: Container(
-              margin: EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 20),
+              margin: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
