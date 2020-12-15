@@ -32,6 +32,7 @@ dependencies:
   file_picker: ^2.1.0
   image: ^2.1.19
   progress_indicators: ^0.1.5
+  executorservices: ^2.0.3
 
 dev_dependencies:
   flutter_test:
