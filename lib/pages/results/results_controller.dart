@@ -4,7 +4,6 @@ import 'package:image/image.dart';
 import 'package:get/get.dart';
 
 class ResultsController extends GetxController{
-
   static const MethodChannel methodChannel = const MethodChannel('speed_of_img_endec');
 
   @override
@@ -67,6 +66,15 @@ class ResultsController extends GetxController{
     print('\n > Dart png encoding took: ${dartTimeOfPngEncoding.value} seconds');
     dartPngEncoded.value = true;
 
+  }
+
+  static Future<Image> dartImageDecoding(String imagePath) async {
+
+    if (File(imagePath).existsSync() == false) {
+      print('\n***\n\tFile at "$imagePath" does not exist.\n***\n');
+    } else {
+      return decodeImage(File(imagePath).readAsBytesSync());
+    }
   }
 
   Future javaImageEnDec(String imageFilepath) async {
