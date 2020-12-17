@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:executorservices/executorservices.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart';
 import 'package:get/get.dart';
 
 class ResultsController extends GetxController{
+  ExecutorService executorService;
   static const MethodChannel methodChannel = const MethodChannel('speed_of_img_endec');
 
   @override
@@ -34,13 +36,17 @@ class ResultsController extends GetxController{
   final javaTimeOfPngEncoding = 0.0.obs;
 
   Future dartImageEnDec(String imageFilepath) async {
+    executorService ??= ExecutorService.newSingleExecutor();
 
     dartQueuingImageDecoding.value = false;
 
     await Future.delayed(const Duration(milliseconds: 500));
 
     final aa = Stopwatch()..start();
-    final decodedImage = decodeImage(File(imageFilepath).readAsBytesSync());
+
+    // final decodedImage = decodeImage(File(imageFilepath).readAsBytesSync());
+    final decodedImage = await executorService.submitCallable(dartImageDecoding, imageFilepath);
+
     dartTimeOfImageDecoding.value = (aa.elapsed.inMilliseconds / 1000).toPrecision(1);
     print('\n > Dart image decoding took: ${dartTimeOfImageDecoding.value} seconds');
 
@@ -65,6 +71,10 @@ class ResultsController extends GetxController{
     dartTimeOfPngEncoding.value = (ac.elapsed.inMilliseconds / 1000).toPrecision(1);
     print('\n > Dart png encoding took: ${dartTimeOfPngEncoding.value} seconds');
     dartPngEncoded.value = true;
+
+    if (executorService != null) {
+      executorService.shutdown();
+    }
 
   }
 
