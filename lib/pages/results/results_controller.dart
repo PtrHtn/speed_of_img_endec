@@ -93,8 +93,7 @@ class ResultsController extends GetxController{
     if (decodedImage.isNullOrBlank) {
       print('\n***\n\tDecoded image is null or blank.\n***\n');
     } else {
-      return encodePng(decodedImage);
-
+      encodePng(decodedImage);
     }
   }
 
