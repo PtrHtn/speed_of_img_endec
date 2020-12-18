@@ -67,7 +67,8 @@ class ResultsController extends GetxController{
     await Future.delayed(const Duration(milliseconds: 500));
 
     final ac = Stopwatch()..start();
-    encodePng(decodedImage);
+    // encodePng(decodedImage);
+    await executorService.submitCallable(dartPngEncoding, decodedImage);
     dartTimeOfPngEncoding.value = (ac.elapsed.inMilliseconds / 1000).toPrecision(1);
     print('\n > Dart png encoding took: ${dartTimeOfPngEncoding.value} seconds');
     dartPngEncoded.value = true;
@@ -84,6 +85,16 @@ class ResultsController extends GetxController{
       print('\n***\n\tFile at "$imagePath" does not exist.\n***\n');
     } else {
       return decodeImage(File(imagePath).readAsBytesSync());
+    }
+  }
+
+  static Future<void> dartPngEncoding(Image decodedImage) async {
+
+    if (decodedImage.isNullOrBlank) {
+      print('\n***\n\tDecoded image is null or blank.\n***\n');
+    } else {
+      return encodePng(decodedImage);
+
     }
   }
 
