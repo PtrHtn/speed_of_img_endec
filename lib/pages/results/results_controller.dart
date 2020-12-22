@@ -14,7 +14,7 @@ class ResultsController extends GetxController{
     await dartImageEnDec(Get.arguments[0]);
     await javaImageEnDec(Get.arguments[0]);
   }
-
+  final jumpingDots = true.obs;
   final dartQueuingImageDecoding = true.obs;
   final dartQueuingJpgEncoding = true.obs;
   final dartQueuingPngEncoding = true.obs;
@@ -133,7 +133,7 @@ class ResultsController extends GetxController{
     javaTimeOfPngEncoding.value = (await javaPngEncoding(imageFilepath) / 1000).toPrecision(2);
     print('\n > Java png encoding took: ${javaTimeOfPngEncoding.value} seconds');
     javaPngEncoded.value = true;
-
+    jumpingDots.value = false;
   }
 
   static Future<int> javaImageDecoding(String imageFilepath) async {
