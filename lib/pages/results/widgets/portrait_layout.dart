@@ -63,7 +63,9 @@ class PortraitLayoutBody extends GetView<ResultsController> {
               ),
             ),
           ),
-          JumpingDotsProgressIndicator(
+          controller.jumpingDots.value == false
+          ? Container()
+          : JumpingDotsProgressIndicator(
             numberOfDots: 22,
             color: Colors.white,
             fontSize: 25,
