@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -46,19 +48,25 @@ class PortraitLayoutBody extends GetView<ResultsController> {
                 children: [
                   Text("Dart\n"),
                   controller.dartImageDecoded.value == false
-                      ? Text("Image decoding: ${controller.dartQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n")
+                      ? Text("Image decoding: ${controller.dartQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n",
+                    style: TextStyle(color: controller.dartQueuingImageDecoding.value ? Colors.red : Colors.orange ),)
                       : Text(
-                      "Image decoding: ${controller.dartTimeOfImageDecoding.value} sec\n"),
+                      "Image decoding: ${controller.dartTimeOfImageDecoding.value} sec\n",
+                    style: TextStyle(color: Colors.green),),
                   controller.dartJpgEncoded.value == false
                       ? Text(
-                      "Jpg encoding: ${controller.dartQueuingJpgEncoding.value ? 'Queuing' : 'Processing'}\n")
+                      "Jpg encoding: ${controller.dartQueuingJpgEncoding.value ? 'Queuing' : 'Processing'}\n",
+                    style: TextStyle(color: controller.dartQueuingJpgEncoding.value ? Colors.red : Colors.orange ),)
                       : Text(
-                      "Jpg encoding: ${controller.dartTimeOfJpgEncoding.value} sec\n"),
+                      "Jpg encoding: ${controller.dartTimeOfJpgEncoding.value} sec\n",
+                    style: TextStyle(color: Colors.green),),
                   controller.dartPngEncoded.value == false
                       ? Text(
-                      "Png encoding: ${controller.dartQueuingPngEncoding.value ? 'Queuing' : 'Processing'}")
+                      "Png encoding: ${controller.dartQueuingPngEncoding.value ? 'Queuing' : 'Processing'}",
+                    style: TextStyle(color: controller.dartQueuingPngEncoding.value ? Colors.red : Colors.orange ),)
                       : Text(
-                      "Png encoding: ${controller.dartTimeOfPngEncoding.value} sec")
+                      "Png encoding: ${controller.dartTimeOfPngEncoding.value} sec",
+                    style: TextStyle(color: Colors.green),)
                 ],
               ),
             ),
