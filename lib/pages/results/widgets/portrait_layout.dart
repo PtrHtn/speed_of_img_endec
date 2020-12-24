@@ -90,19 +90,25 @@ class PortraitLayoutBody extends GetView<ResultsController> {
                 children: [
                   Text("Java\n"),
                   controller.javaImageDecoded.value == false
-                      ? Text("Image decoding: ${controller.javaQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n")
+                      ? Text("Image decoding: ${controller.javaQueuingImageDecoding.value ? 'Queuing' : 'Processing'}\n",
+                    style: TextStyle(color: controller.javaQueuingImageDecoding.value ? Colors.red : Colors.orange ),)
                       : Text(
-                      "Image decoding: ${controller.javaTimeOfImageDecoding.value} sec\n"),
+                      "Image decoding: ${controller.javaTimeOfImageDecoding.value} sec\n",
+                    style: TextStyle(color: Colors.green),),
                   controller.javaJpgEncoded.value == false
                       ? Text(
-                      "Jpg encoding: ${controller.javaQueuingJpgEncoding.value ? 'Queuing' : 'Processing'}\n")
+                      "Jpg encoding: ${controller.javaQueuingJpgEncoding.value ? 'Queuing' : 'Processing'}\n",
+                    style: TextStyle(color: controller.javaQueuingJpgEncoding.value ? Colors.red : Colors.orange ),)
                       : Text(
-                      "Jpg encoding: ${controller.javaTimeOfJpgEncoding.value} sec\n"),
+                      "Jpg encoding: ${controller.javaTimeOfJpgEncoding.value} sec\n",
+                    style: TextStyle(color: Colors.green),),
                   controller.javaPngEncoded.value == false
                       ? Text(
-                      "Png encoding: ${controller.javaQueuingPngEncoding.value ? 'Queuing' : 'Processing'}")
+                      "Png encoding: ${controller.javaQueuingPngEncoding.value ? 'Queuing' : 'Processing'}",
+                    style: TextStyle(color: controller.javaQueuingPngEncoding.value ? Colors.red : Colors.orange ),)
                       : Text(
-                      "Png encoding: ${controller.javaTimeOfPngEncoding.value} sec")
+                      "Png encoding: ${controller.javaTimeOfPngEncoding.value} sec",
+                    style: TextStyle(color: Colors.green),)
                 ],
               ),
             ),
