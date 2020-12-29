@@ -40,8 +40,6 @@ class ResultsController extends GetxController{
 
     dartQueuingImageDecoding.value = false;
 
-    await Future.delayed(const Duration(milliseconds: 500));
-
     final aa = Stopwatch()..start();
 
     // final decodedImage = decodeImage(File(imageFilepath).readAsBytesSync());
@@ -54,8 +52,6 @@ class ResultsController extends GetxController{
 
     dartQueuingJpgEncoding.value = false;
 
-    await Future.delayed(const Duration(milliseconds: 500));
-
     final ab = Stopwatch()..start();
     // encodeJpg(decodedImage);
     await executorService.submitCallable(dartJpgEncoding, decodedImage);
@@ -64,8 +60,6 @@ class ResultsController extends GetxController{
     dartJpgEncoded.value = true;
 
     dartQueuingPngEncoding.value = false;
-
-    await Future.delayed(const Duration(milliseconds: 500));
 
     final ac = Stopwatch()..start();
     // encodePng(decodedImage);
