@@ -2,7 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController{
+class ImagePickerController extends GetxController{
 
   String imageAddress;
 
