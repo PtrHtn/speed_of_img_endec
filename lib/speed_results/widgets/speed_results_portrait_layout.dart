@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
-import '../results_controller.dart';
+import '../speed_results_controller.dart';
 
-class PortraitLayout extends StatelessWidget {
+class SpeedResultsPortraitLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,12 +22,12 @@ class PortraitLayout extends StatelessWidget {
           ],
         ),
       ),
-      body: PortraitLayoutBody(),
+      body: SpeedResultsPortraitLayoutBody(),
     );
   }
 }
 
-class PortraitLayoutBody extends GetView<ResultsController> {
+class SpeedResultsPortraitLayoutBody extends GetView<SpeedResultsController> {
   @override
   Widget build(BuildContext context) {
     return Container(

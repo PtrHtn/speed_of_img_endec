@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 import 'image_picker/image_picker_binding.dart';
 import 'image_picker/image_picker_page.dart';
+import 'speed_results/speed_results_binding.dart';
+import 'speed_results/speed_results_page.dart';
 
 void main() {
   runApp(SpeedOfImageEcDecApp());
@@ -21,7 +23,7 @@ class SpeedOfImageEcDecApp extends StatelessWidget {
       initialRoute: '/home_page',
       getPages: [
         GetPage(name: '/home_page', page: () => ImagePickerPage(), binding: ImagePickerBinding()),
-        GetPage(name: '/results_page', page: () => ResultsPage(), binding: ResultsBinding()),
+        GetPage(name: '/results_page', page: () => SpeedResultsPage(), binding: SpeedResultsBinding()),
       ],
     );
   }

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../results_controller.dart';
+import '../speed_results_controller.dart';
 
-class LandscapeLayout extends StatelessWidget {
+class SpeedResultsLandscapeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      body: LandscapeLayoutBody(),
+      body: SpeedResultsLandscapeLayoutBody(),
     );
   }
 }
 
-class LandscapeLayoutBody extends GetView<ResultsController> {
+class SpeedResultsLandscapeLayoutBody extends GetView<SpeedResultsController> {
   @override
   Widget build(BuildContext context) {
 

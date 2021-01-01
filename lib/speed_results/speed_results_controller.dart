@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:image/image.dart';
 import 'package:get/get.dart';
 
-class ResultsController extends GetxController{
+class SpeedResultsController extends GetxController{
   ExecutorService executorService;
   static const MethodChannel methodChannel = const MethodChannel('speed_of_img_endec');
 
